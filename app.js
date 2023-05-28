@@ -5,13 +5,15 @@ const app = express();
 let ejs = require('ejs');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+require('dotenv').config();
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://ridhichhajer11:jJyyJVVdX2yXTkd5@todo.m0y7zs7.mongodb.net/toDoListDB");
+const url = process.env.MONGO_URL;
+mongoose.connect(url);
 
 const itemSchema = new mongoose.Schema({
     name: {
